@@ -1,0 +1,3 @@
+"0","comm_data %>%"
+"0","  mutate(sentiment_label = ifelse(sentiment > 0.1, ""positive"", ifelse(sentiment < -0.1, ""negative"", ""neutral""))) %>%"
+"0","  select(message,sentiment,sentiment_label)"

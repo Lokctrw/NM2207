@@ -1,0 +1,4 @@
+"0","comm_data %>% #unsure"
+"0","  group_by(date) %>%"
+"0","  summarise(mean_sentiment = mean(sentiment)) %>%"
+"0","  arrange(date)"

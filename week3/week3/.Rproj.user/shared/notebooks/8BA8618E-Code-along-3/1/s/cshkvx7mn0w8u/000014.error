@@ -1,0 +1,1 @@
+{"frames":[{"func":"mean(number_of_cats)","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in mean(number_of_cats) : object 'number_of_cats' not found\n"}

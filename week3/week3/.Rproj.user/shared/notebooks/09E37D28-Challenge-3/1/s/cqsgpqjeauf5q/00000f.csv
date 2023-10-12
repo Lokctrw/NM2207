@@ -1,0 +1,7 @@
+"0","values <- c(1,2,5,3,7,8,3,2,3,5)"
+"0","last_element <- values[length(values)]"
+"0","print(last_element)"
+"1","[1]"
+"1"," 5"
+"1","
+"

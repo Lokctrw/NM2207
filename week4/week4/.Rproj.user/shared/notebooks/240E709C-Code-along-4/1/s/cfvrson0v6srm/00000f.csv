@@ -1,0 +1,3 @@
+"0","hotels %>%"
+"0","  mutate(little_ones = children + babies) %>%"
+"0","  select(hotel,little_ones,children,babies)"

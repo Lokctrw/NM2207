@@ -1,0 +1,7 @@
+"0","comm_data %>% #unsure"
+"0","  group_by(sender) %>%"
+"0","  summarise(average_sentiment = mean(sentiment))%>%"
+"0","  filter(average_sentiment > 0)%>%"
+"0","  arrange(desc(average_sentiment)) %>%"
+"0","  select(sender, average_sentiment) %>%"
+"0","  head(3)"

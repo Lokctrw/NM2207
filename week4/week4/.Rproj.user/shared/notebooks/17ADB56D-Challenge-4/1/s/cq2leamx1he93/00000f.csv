@@ -1,0 +1,7 @@
+"0","frame_2 <- comm_data %>%"
+"0","  filter("
+"0","    date == ""2023-08-02"","
+"0","    channel == ""Twitter"""
+"0","  ) %>%"
+"0","  select(date,channel,message)"
+"0","frame_2"

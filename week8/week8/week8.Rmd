@@ -1,0 +1,20 @@
+---
+title: "week8"
+author: "lok"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## 
+```{r, eval=TRUE,echo=TRUE}
+knitr::include_graphics("/Users/lokchingwong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/year2sem1/NM2207/week8/screenshot.png")
+
+knitr::include_graphics("/Users/lokchingwong/Desktop/screenshot2.png")
+knitr::include_graphics("/Users/lokchingwong/Desktop/screenshot3.png")
+
+```

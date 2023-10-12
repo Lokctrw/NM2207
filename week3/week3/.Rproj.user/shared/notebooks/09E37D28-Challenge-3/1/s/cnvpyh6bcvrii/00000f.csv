@@ -1,0 +1,7 @@
+"0","mixed_data <- list(numerical_vector = c(10,20,30), character_vector = c(""red"", ""green"", ""blue""), logical_vector = c(TRUE,FALSE,TRUE))"
+"0","mean_of_numerical_vector <- mean(mixed_data$numerical_vector)"
+"0","print(mean_of_numerical_vector)"
+"1","[1]"
+"1"," 20"
+"1","
+"
