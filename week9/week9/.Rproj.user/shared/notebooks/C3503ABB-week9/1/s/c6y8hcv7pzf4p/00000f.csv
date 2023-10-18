@@ -1,0 +1,5 @@
+"0","library(ggplot2)"
+"0",""
+"0","#plot"
+"0","ggplot(billboard_long, aes(x = week, y = rank)) +"
+"0","  geom_line()"
