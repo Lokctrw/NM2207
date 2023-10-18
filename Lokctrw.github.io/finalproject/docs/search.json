@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "finalproject",
+    "section": "",
+    "text": "This is Lok and in this website, you can search and display the football player’s rating of your choice!"
+  },
+  {
+    "objectID": "index.html#intro",
+    "href": "index.html#intro",
+    "title": "finalproject",
+    "section": "",
+    "text": "This is Lok and in this website, you can search and display the football player’s rating of your choice!"
+  },
+  {
+    "objectID": "index.html#github-link",
+    "href": "index.html#github-link",
+    "title": "finalproject",
+    "section": "Github link",
+    "text": "Github link\nhttps://github.com/Lokctrw/NM2207\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  }
+]
