@@ -1,0 +1,86 @@
+---
+title: "week10"
+author: "lok"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Week 9
+
+## (1) What is the topic that you have finalized?
+
+### The topic chosen is football players' rating, the website should allow user to search and select player they want, display the the player's overall rating as well as rating of categories including pace, sterngth, shooting etc. (if possible, allow user to compare between different players)
+
+
+
+## (2) What are the data sources that you have curated so far?
+
+### data is available from EA FC24 (the football game) online, I'm still trying to find a way to export or download all the data. (https://www.ea.com/games/ea-sports-fc/ratings) update: found on (https://www.kaggle.com/datasets/nyagami/fc-24-players-database-and-stats-from-easports/data)
+
+## Week 10
+
+## (1) What is the question that you are going to answer? 
+### What are the insights that can be drawn from the football players' rating in 2024
+
+## (2) Why is this an important question? 
+### football is one of the mainstream entertainment / sports, and by presenting the data about players in an oraganised way, one can search and learn more about the player or teams of their interest, as well as the detail value after different categories such as pace, shooting, strength etc.
+
+## (3) Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).
+### the column of name, nation, club and position can be used to filter or search players, where the overall rating, and the categorical rating (pace, shooting, passing, dribbling, defending, physicality, acceleration sprint, positioning, finishing, etc) can be display to the user.
+
+```{r, eval=TRUE,echo=TRUE}
+# loading the data
+library(tidyverse)
+eafc_data <- read_csv("male_players.csv")
+
+eafc_data
+
+```
+```{r, eval=TRUE,echo=TRUE}
+# Attempting to create a search engine
+searchData <- function(data, query, column_name) {
+  result <- data[grep(query, data[["Name"]], ignore.case = TRUE), ]
+  return(result)
+}
+
+user_query <- readline("Player name: ")
+search_result <- searchData(eafc_data, user_query, "Name")
+print(search_result[, ])
+```
+
+```{r, eval=TRUE,echo=TRUE}
+# integrate into shiny
+library(shiny)
+
+eafc_data <- read.csv("male_players.csv")
+
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      textInput("search_query", "Search:")
+    ),
+    mainPanel(
+      DT::dataTableOutput("search_result_table")
+    )
+  )
+)
+
+server <- function(input, output) {
+  searchData <- reactive({
+    result <- eafc_data[grep(input$search_query, eafc_data$"Name", ignore.case = TRUE), ]
+    return(result)
+  })
+  
+  output$search_result_table <- DT::renderDataTable({
+    searchData()
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+

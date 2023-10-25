@@ -1,0 +1,4 @@
+"0","library(tidyverse)"
+"0","eafc_data <- read_csv(""male_players.csv"")"
+"2","Error: 'male_players.csv' does not exist in current working directory ('/Users/lokchingwong/Library/CloudStorage/OneDrive-NationalUniversityofSingapore/year2sem1/NM2207/week10').
+"

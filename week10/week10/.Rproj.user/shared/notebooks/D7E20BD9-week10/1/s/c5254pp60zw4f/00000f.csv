@@ -1,0 +1,12 @@
+"0","library(tidyverse)"
+"0","eafc_data <- read_csv(""male_players.csv"")"
+"2","New names:"
+"2","[1mRows: [22m[34m15845[39m [1mColumns: [22m[34m47[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m───────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m  (9): Name, Nation, Club, Position, Att work rate, Def work rate, Preferred foot, URL, Gender
+[32mdbl[39m (38): ...1, Age, Overall, Pace, Shooting, Passing, Dribbling, Defending, Physicality, Acceleration,..."
+"2","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message."
+"0","eafc_data"
