@@ -153,12 +153,13 @@ rownames(max_min) <- c("Max", "Min")
 eafc_data <- rbind(max_min, read.csv("male_players.csv") %>% 
   select(Pace, Shooting, Passing, Dribbling, Defending, Physicality))
 
+
 # Read the data
 selected_player <- eafc_data[c("Max", "Min", "Lionel Messi"),]
-
+selected_player_dbl <- as.numeric(unlist(selected_player))
 
 # Create a radar chart
-radarchart(selected_player, aes(x = variable, y = value))
+radarchart(selected_player_dbl, aes(x = variable, y = value))
 
 # Customize the appearance of the radar chart
 labs(title = "Radar Chart of FC24 Players", x = "Overall", y = "Attribute")
@@ -166,7 +167,11 @@ labs(title = "Radar Chart of FC24 Players", x = "Overall", y = "Attribute")
 ```
 
 ```{r, eval=TRUE,echo=TRUE}
+selected_player <- eafc_data %>%
+    filter(Name == "Lionel Messi") %>%
+    select(Pace, Shooting, Passing, Dribbling, Defending, Physicality)
 
+radarchart("Max", "Min", "Lionel Messi")
 ```
 
 ```{r, eval=TRUE,echo=TRUE}
@@ -202,4 +207,80 @@ mainPanel(
     labs(title = "Radar Chart of FC24 Players", x = "Overall", y = "Attribute")
   })
 )
+```
+
+```{r, eval=TRUE,echo=TRUE}
+#1. Which club has the highest average rating of players? 
+
+library(ggplot2)
+library(tidyverse)
+
+club_average_rating <- eafc_data %>%
+  group_by(Club) %>%
+  summarise(mean_rating = mean(Overall))
+
+club_with_highest_average_rating <- club_average_rating %>%
+  arrange(desc(mean_rating))
+
+club_with_highest_average_rating
+
+top_20_clubs <- club_with_highest_average_rating %>% slice_head(n=20)
+
+top_20_clubs$is_top_five <- rank(top_20_clubs$mean_rating, ties.method = "first") <= 5
+
+top_100_clubs <- club_with_highest_average_rating %>% slice_head(n=100)
+
+# Plot the average rating for the top 50 clubs
+# Add labels to the top three clubs
+ggplot(top_20_clubs, aes(x = Club, y = mean_rating)) +
+  geom_bar(stat = "identity")+
+  labs(title = "Average Rating of FC-24 Players by Club (Top 20)", x = "Club", y = "Average Rating") +
+  theme_minimal() +  coord_flip() +
+  geom_label(aes(label = Club), data = filter(is_top_five), hjust = 1.5, vjust = 0.5, fill = "white")
+
+
+ggplot(club_average_rating, aes(x = mean_rating)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Average Rating of FC-24 Players by Club Distribution", x = "Average Rating", y = "Count") +
+  theme_minimal() 
+```
+
+```{r, eval=TRUE,echo=TRUE}
+#2. Which country has the highest count of professional players? 
+library(tidyverse)
+library(ggplot2)
+
+# Count the number of players from each country
+country_player_count <- eafc_data %>%
+  group_by(Nation) %>%
+  summarise(player_count = n())
+
+# Identify the country with the highest player count
+country_with_highest_player_count <- country_player_count %>%
+  arrange(desc(player_count)) %>%
+  slice_head(n=20)
+
+country_with_highest_player_count
+
+# Plot the player count for each country
+ggplot(country_with_highest_player_count, aes(x = Nation, y = player_count)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of FC-24 Players by Country (Top 20)", x = "Country", y = "Number of Players") +
+  theme_minimal() + coord_flip()
+
+```
+
+```{r, eval=TRUE,echo=TRUE}
+#3. What percentage of players have a overall rating higher than 80, what does that imply? 
+number_of_players_with_rating_above_80 <- length(which(eafc_data$Overall > 80))
+total_number_of_players <- nrow(eafc_data)
+percentage_of_players_with_rating_above_80 <- number_of_players_with_rating_above_80 / total_number_of_players * 100
+
+# Print the percentage
+print(percentage_of_players_with_rating_above_80)
+
+ggplot(eafc_data, aes(x = Overall, fill = Position)) +
+  geom_density(adjust = 2, alpha = 0.5) +
+  labs(title = "Distribution of Overall Ratings in FC-24", x = "Overall Rating", y = "Density") +
+  theme_bw()
 ```
