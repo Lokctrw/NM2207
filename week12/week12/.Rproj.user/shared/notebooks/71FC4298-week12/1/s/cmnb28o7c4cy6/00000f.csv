@@ -1,0 +1,59 @@
+"0","# integrate into shiny"
+"0","library(fmsb)"
+"0",""
+"0","# Read the data"
+"0","selected_player <- read.csv(""male_players.csv"") %>% "
+"0","  filter(Name == ""Lionel Messi"") %>% "
+"0","  select(Pace, Shooting, Passing, Dribbling, Defending, Physicality) "
+"0",""
+"0","# Create a radar chart"
+"0","radarchart(selected_player)"
+"1","[DATA NOT ENOUGH] at 3
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 3
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 3
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 3
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 3
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 3
+NA
+"
+"1","[DATA NOT ENOUGH] at 2
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 2
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 2
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 2
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 2
+NA
+"
+"1"," "
+"1","[DATA NOT ENOUGH] at 2
+NA
+"
+"2","Error in polygon(xxs, yys, lty = pltys[i - 2], lwd = plwds[i - 2], border = pcols[i -  : 
+  invalid value specified for graphical parameter ""lwd""
+"

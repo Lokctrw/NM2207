@@ -1,0 +1,205 @@
+---
+title: "week12"
+author: "lok"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "week11_submission"
+author: "lok"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Week 9
+
+## (1) What is the topic that you have finalized?
+
+### The topic chosen is football players' rating, the website should allow user to search and select player they want, display the the player's overall rating as well as rating of categories including pace, sterngth, shooting etc. (if possible, allow user to compare between different players)
+
+
+## (2) What are the data sources that you have curated so far?
+
+### data is available from EA FC24 (the football game) online, I'm still trying to find a way to export or download all the data. (https://www.ea.com/games/ea-sports-fc/ratings) update: found on (https://www.kaggle.com/datasets/nyagami/fc-24-players-database-and-stats-from-easports/data)
+
+## Week 10
+
+## (1) What is the question that you are going to answer? 
+### What are the insights that can be drawn from the football players' rating in 2024? This can be broken down into various questions: 1. Which club has the highest average rating of players? 2. Which country has the highest count of professional players? 3. What percentage of players have a overall rating higher than 80, what does that imply? 
+
+## (2) Why is this an important question? 
+### football is one of the mainstream entertainment / sports, and by presenting the data about players in an oraganised way, one can search and learn more about the player or teams of their interest, as well as the detail value after different categories such as pace, shooting, strength etc.
+
+## (3) Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).
+### the column of name, nation, club and position can be used to filter or search players, where the overall rating, and the categorical rating (pace, shooting, passing, dribbling, defending, physicality, acceleration sprint, positioning, finishing, etc) can be display to the user.
+
+```{r, eval=TRUE,echo=TRUE}
+# data
+library(tidyverse)
+eafc_data <- read_csv("male_players.csv")
+
+eafc_data
+
+```
+
+```{r, eval=TRUE,echo=TRUE}
+# Attempting to create a search engine
+searchData <- function(data, query, column_name) {
+  result <- data[grep(query, data[["Name"]], ignore.case = TRUE), ]
+  return(result)
+}
+
+user_query <- readline("Player name: ")
+search_result <- searchData(eafc_data, user_query, "Name")
+print(search_result[, ])
+```
+
+```{r, eval=TRUE,echo=TRUE}
+#integrating into shiny
+library(shiny)
+library(dplyr)
+
+eafc_data <- read.csv("male_players.csv") %>% select(Name, Nation, Club, Position, Overall, Pace, Shooting, Passing, Dribbling, Defending, Physicality)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      textInput("search_query", "Search:")
+    ),
+    mainPanel(
+      DT::dataTableOutput("search_result_table")
+    )
+  )
+)
+
+server <- function(input, output) {
+  searchData <- reactive({
+    result <- eafc_data[grep(input$search_query, eafc_data$"Name", ignore.case = TRUE), ]
+    return(result)
+  })
+  
+  output$search_result_table <- DT::renderDataTable({
+    searchData()
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+## Week 11
+## (1)  List the visualizations that you are going to use in your project (Answer: What are the variables that you are going to plot? How will it answer your larger question?)
+### visualizations will consist of a few graph to answer the sub-questions, 1. Which club has the highest average rating of players? the data will be grouped by club, take the average of the overall rating of each club, then plot x = club and y = average overall rating 2. Which country has the highest count of professional players? data will be arranged by country, count number of data for each country, then plot x = country and y = number of players (number of data entry) 3. What percentage of players have a overall rating higher than 80, what does that imply? this can be calculated by the number of entries with rating higher than 80 divided by the total number of data, this will be illustrated with a Pie chart.
+### furthermore, an interactive shiny app will be embedded for user to search any player they interested in, ideally, will plot the chosen player's rating in radar plot.
+
+## (2) How do you plan to make it interactive? (Answer: features of ggplot2/shiny/markdown do you plan to use to make the story interactive)
+### they interactive part will be illustrated by the shiny app, by allowing the user to search any player they interested in, as well as plotting the chosen player's specific rating with radar plot
+
+## (3) What concepts incorporated in your project were taught in the course and which ones were self-learnt? (Answer: Create a table with topics in one column and Weeks in the other to indicate which concept taught in which week is being used. Leave the entry of the Week column empty for self-learnt concepts)
+```{r, eval=TRUE,echo=TRUE}
+week <- c("4", "7", "8", "NA", "NA")
+concept <- c("manipulating data (select column)", "ggplot2", "shiny app", "radar plot", "building search engine")
+
+data.frame(concept, week)
+```
+
+##Week 12
+```{r, eval=TRUE,echo=TRUE}
+library(shiny)
+library(dplyr)
+
+eafc_data <- read.csv("male_players.csv") %>% select(Name, Nation, Club, Position, Overall, Pace, Shooting, Passing, Dribbling, Defending, Physicality)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      textInput("search_query", "Search:")
+    ),
+    mainPanel(
+      DT::dataTableOutput("search_result_table")
+    )
+  )
+)
+
+server <- function(input, output) {
+  searchData <- reactive({
+    result <- eafc_data[grep(input$search_query, eafc_data$"Name", ignore.case = TRUE), ]
+    return(result)
+  })
+  
+  output$search_result_table <- DT::renderDataTable({
+    searchData()
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+```{r, eval=TRUE,echo=TRUE}
+# integrate into shiny
+library(fmsb)
+
+max_min <- data.frame(
+  Pace = c(100, 0), Shooting = c(100, 0), Passing = c(100, 0),
+  Dribbling = c(100, 0), Defending = c(100, 0), Physicality = c(100, 0)
+)
+rownames(max_min) <- c("Max", "Min")
+
+# Bind the variable ranges to the data
+eafc_data <- rbind(max_min, read.csv("male_players.csv") %>% 
+  select(Pace, Shooting, Passing, Dribbling, Defending, Physicality))
+
+# Read the data
+selected_player <- eafc_data[c("Max", "Min", "Lionel Messi"),]
+
+
+# Create a radar chart
+radarchart(selected_player, aes(x = variable, y = value))
+
+# Customize the appearance of the radar chart
+labs(title = "Radar Chart of FC24 Players", x = "Overall", y = "Attribute")
+
+```
+
+```{r, eval=TRUE,echo=TRUE}
+
+```
+
+```{r, eval=TRUE,echo=TRUE}
+library(shiny)
+library(fmsb)
+
+# Read the data
+eafc_data <- read.csv("male_players.csv")
+
+# Create a reactive variable to store the selected player's data
+selected_player <- reactive({
+  eafc_data %>%
+    filter(Name == input$player_name) %>%
+    select(Pace, Shooting, Passing, Dribbling, Defending, Physicality)
+})
+
+# Create a sidebar panel to allow the user to select a player
+sidebarPanel(
+  selectInput(
+    inputId = "player_name",
+    label = "Player:",
+    choices = eafc_data$Name,
+    selected = "Lionel Messi"
+  )
+)
+
+# Create a main panel to display the radar chart
+mainPanel(
+  renderPlot({
+    radarchart(selected_player())
+    coord_polar(xlim = c(0, 100), ylim = c(0, 100))
+    theme_bw()
+    labs(title = "Radar Chart of FC24 Players", x = "Overall", y = "Attribute")
+  })
+)
+```

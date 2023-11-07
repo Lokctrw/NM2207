@@ -1,0 +1,1 @@
+{"frames":[{"func":"radarchart(selected_player, aes(x = variable, y = value))","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in radarchart(selected_player, aes(x = variable, y = value)) : \n  'list' object cannot be coerced to type 'double'\n"}

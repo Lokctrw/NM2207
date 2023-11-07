@@ -1,0 +1,4 @@
+"0","week <- c(""4"", ""7"", ""8"", ""NA"", ""NA"")"
+"0","concept <- c(""manipulating data (select column)"", ""ggplot2"", ""shiny app"", ""radar plot"", ""building search engine"")"
+"0",""
+"0","data.frame(concept, week)"
