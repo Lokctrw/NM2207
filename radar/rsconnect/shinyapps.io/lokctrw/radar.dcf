@@ -1,0 +1,12 @@
+name: radar
+title: radar
+username: lokctrw
+account: lokctrw
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10518168
+bundleId: 7925729
+url: https://lokctrw.shinyapps.io/radar/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

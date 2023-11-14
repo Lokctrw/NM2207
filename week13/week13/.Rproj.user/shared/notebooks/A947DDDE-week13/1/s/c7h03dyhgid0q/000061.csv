@@ -1,0 +1,6 @@
+"0",""
+"0",""
+"0","ggplot(club_average_rating, aes(x = mean_rating)) +"
+"0","  geom_histogram(binwidth = 1) +"
+"0","  labs(title = ""Average Rating of FC-24 Players by Club Distribution"", x = ""Average Rating"", y = ""Count"") +"
+"0","  theme_minimal() "

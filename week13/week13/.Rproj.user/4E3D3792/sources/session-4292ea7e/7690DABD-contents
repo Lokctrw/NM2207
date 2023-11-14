@@ -1,0 +1,32 @@
+
+
+library(shiny)
+library(dplyr)
+
+eafc_data <- read.csv("male_players.csv") %>% select(Name, Nation, Club, Position, Overall, Pace, Shooting, Passing, Dribbling, Defending, Physicality)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      textInput("search_query", "Search name:") ,
+      downloadButton("download_table", "Download Table")
+    ),
+    mainPanel(
+      DT::dataTableOutput("search_result_table")
+    )
+  )
+)
+
+server <- function(input, output) {
+  searchData <- reactive({
+    result <- eafc_data[grep(input$search_query, eafc_data$"Name", ignore.case = TRUE), ]
+    return(result)
+  })
+  
+  output$search_result_table <- DT::renderDataTable({
+    searchData()
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
