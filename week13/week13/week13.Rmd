@@ -39,7 +39,6 @@ library(tidyverse)
 eafc_data <- read_csv("male_players.csv")
 
 eafc_data
-
 ```
 
 ```{r, eval=TRUE,echo=TRUE}
