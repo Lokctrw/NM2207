@@ -1,7 +1,0 @@
-"0",""
-"0","# Plot the player count for each country"
-"0","ggplot(country_with_highest_player_count, aes(x = Nation, y = player_count)) +"
-"0","  geom_bar(stat = ""identity"") +"
-"0","  labs(title = ""Number of FC-24 Players by Country (Top 20)"", x = ""Country"", y = ""Number of Players"") +"
-"0","  theme_minimal() + coord_flip()"
-"0",""

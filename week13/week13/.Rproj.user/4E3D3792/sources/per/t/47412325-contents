@@ -11,23 +11,27 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Week 9
 
-## (1) What is the topic that you have finalized?
-#### The topic chosen is football players' rating, the website should allow user to search and select player they want, display the the player's overall rating as well as rating of categories including pace, sterngth, shooting etc. (if possible, allow user to compare between different players)
+### (1) What is the topic that you have finalized?
 
+The topic chosen is football players' rating, the website should allow user to search and select player they want, display the the player's overall rating as well as rating of categories including pace, sterngth, shooting etc. (if possible, allow user to compare between different players)
 
-## (2) What are the data sources that you have curated so far?
-#### data is available from EA FC24 (the football game) online, I'm still trying to find a way to export or download all the data. (https://www.ea.com/games/ea-sports-fc/ratings) update: found on (https://www.kaggle.com/datasets/nyagami/fc-24-players-database-and-stats-from-easports/data)
+### (2) What are the data sources that you have curated so far?
+
+data is available from EA FC24 (the football game) online, I'm still trying to find a way to export or download all the data. (<https://www.ea.com/games/ea-sports-fc/ratings>) update: found on (<https://www.kaggle.com/datasets/nyagami/fc-24-players-database-and-stats-from-easports/data>)
 
 ## Week 10
 
-## (1) What is the question that you are going to answer? 
-#### The question I'm going to answer is "what are the insights that can be drawn from the football players' rating in 2024?" This can be broken down into various questions: 1. Which club has the highest average rating of players? 2. Which country has the highest count of professional players? 3. What percentage of players have a overall rating higher than 80, what does that imply? 
+### (1) What is the question that you are going to answer?
 
-## (2) Why is this an important question? 
-#### football is one of the mainstream entertainment / sports, and by presenting the data about players in an comprehensive way, one can search and learn more about the player or teams of their interest, as well as the detail value after different categories such as pace, shooting, strength etc.
+The question I'm going to answer is "what are the insights that can be drawn from the football players' rating in 2024?" This can be broken down into various questions: 1. Which club has the highest average rating of players? 2. Which country has the highest count of professional players? 3. What percentage of players have a overall rating higher than 80, what does that imply?
 
-## (3) Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).
-#### the column of name, nation, club and position can be used to filter or search players, where the overall rating, and the categorical rating (pace, shooting, passing, dribbling, defending, physicality, acceleration sprint, positioning, finishing, etc) can be display to the user.
+### (2) Why is this an important question?
+
+football is one of the mainstream entertainment / sports, and by presenting the data about players in an comprehensive way, one can search and learn more about the player or teams of their interest, as well as the detail value after different categories such as pace, shooting, strength etc.
+
+### (3) Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).
+
+the column of name, nation, club and position can be used to filter or search players, where the overall rating, and the categorical rating (pace, shooting, passing, dribbling, defending, physicality, acceleration sprint, positioning, finishing, etc) can be display to the user.
 
 ```{r, eval=TRUE,echo=TRUE}
 # data
@@ -84,14 +88,19 @@ shinyApp(ui = ui, server = server)
 ```
 
 ## Week 11
-## (1)  List the visualizations that you are going to use in your project (Answer: What are the variables that you are going to plot? How will it answer your larger question?)
-#### visualizations will consist of a few graph to answer the sub-questions, 1. Which club has the highest average rating of players? the data will be grouped by club, take the average of the overall rating of each club, then plot x = club and y = average overall rating 2. Which country has the highest count of professional players? data will be arranged by country, count number of data for each country, then plot x = country and y = number of players (number of data entry) 3. What percentage of players have a overall rating higher than 80, what does that imply? this can be calculated by the number of entries with rating higher than 80 divided by the total number of data, this will be illustrated with a Pie chart.
-### furthermore, an interactive shiny app will be embedded for user to search any player they interested in, ideally, will plot the chosen player's rating in radar plot.
 
-## (2) How do you plan to make it interactive? (Answer: features of ggplot2/shiny/markdown do you plan to use to make the story interactive)
-#### they interactive part will be illustrated by the shiny app, by allowing the user to search any player they interested in, as well as plotting the chosen player's specific rating with radar plot
+### (1) List the visualizations that you are going to use in your project (Answer: What are the variables that you are going to plot? How will it answer your larger question?)
 
-## (3) What concepts incorporated in your project were taught in the course and which ones were self-learnt? (Answer: Create a table with topics in one column and Weeks in the other to indicate which concept taught in which week is being used. Leave the entry of the Week column empty for self-learnt concepts)
+visualizations will consist of a few graph to answer the sub-questions, 1. Which club has the highest average rating of players? the data will be grouped by club, take the average of the overall rating of each club, then plot x = club and y = average overall rating 2. Which country has the highest count of professional players? data will be arranged by country, count number of data for each country, then plot x = country and y = number of players (number of data entry) 3. What percentage of players have a overall rating higher than 80, what does that imply? this can be calculated by the number of entries with rating higher than 80 divided by the total number of data, this will be illustrated with a Pie chart.
+
+furthermore, an interactive shiny app will be embedded for user to search any player they interested in, ideally, will plot the chosen player's rating in radar plot.
+
+### (2) How do you plan to make it interactive? (Answer: features of ggplot2/shiny/markdown do you plan to use to make the story interactive)
+
+they interactive part will be illustrated by the shiny app, by allowing the user to search any player they interested in, as well as plotting the chosen player's specific rating with radar plot
+
+### (3) What concepts incorporated in your project were taught in the course and which ones were self-learnt? (Answer: Create a table with topics in one column and Weeks in the other to indicate which concept taught in which week is being used. Leave the entry of the Week column empty for self-learnt concepts)
+
 ```{r, eval=TRUE,echo=TRUE}
 week <- c("4", "7", "8", "NA", "NA")
 concept <- c("manipulating data (select column)", "ggplot2", "shiny app", "radar plot", "building search engine")
@@ -100,6 +109,7 @@ data.frame(concept, week)
 ```
 
 ## Week 12
+
 ```{r, eval=TRUE,echo=TRUE}
 library(shiny)
 library(dplyr)
@@ -366,27 +376,44 @@ ggplot(eafc_data, aes(x = Overall, fill = Position)) +
   theme_bw()
 ```
 
+```{r, eval=TRUE,echo=TRUE}
+knitr::include_graphics("shiny_issue.png")
+# encountered issue when trying to publish shiny app, which function locally but show error when published, resolved by updating the packages involved
+```
 ## Week 13 Final submission
-## (1) What is the theme of your data story?
-### The theme of the data story is to investigate the data set of football players' rating from EAFC24, and to provide insights about the data. The main question that would be answered is "what are the insights that can be drawn from the football players' rating in 2024?" This can be broken down into various questions: 1. Which club has the highest average rating of players? 2. Which country has the highest count of professional players? 3. What percentage of players have a overall rating higher than 80, what does that imply? 
 
-## (2) Why is it important to address this question?
-### Football is one of the mainstream entertainment / sports, and by presenting the data about players in an comprehensive way, one can search and learn more about the player or teams of their interest, as well as the detail value after different categories such as pace, shooting, strength etc. The specific questions are chosen because by answering these question, it provides insight into topic in various aspects, which explore the data from the view of club teams, national teams, and individual players.
+### (1) What is the theme of your data story?
 
-## (3) Why do you think the data sources that you have curated can help you answer the question?
-### the data set used in this project is a csv file that contain all ratings of the male football players registered in the EAFC24 game, the raw data set contains 15845 rows of observations with 40 categories (columns) of data for each observation. By filtering the desired categories, this detailed data set is sufficient to answer the questions constructed.
+The theme of the data story is to investigate the data set of football players' rating from EAFC24, and to provide insights about the data. The main question that would be answered is "what are the insights that can be drawn from the football players' rating in 2024?" This can be broken down into various questions: 1. Which club has the highest average rating of players? 2. Which country has the highest count of professional players? 3. What percentage of players have a overall rating higher than 80, what does that imply?
 
-## (4) What are the insights from the data and how are they depicted in plots?
-#### From exploring the data and answering the designed questions, we were able to observe various insights. Firstly from the first question, we had a rough idea of teams rating distribution, that majority of the clubs have a average player rating from 60 to 70, this was observed from the distribution graph. This distribution was also compared with the top teams, where the Top 20 club was listed out and plot a saparate graph, showing the competetiveness among the top teams. From the second question, the players were viewed from the point of national team, where the top nations are listed out and a graph was plotted, showing that the number of players differ significantly among the top countries. From the third question, viewing from the perspective of individual player, the point was stressed on the extreme difficulty to be a player of the top level, as indicated by the rating distribution graph, dissected by different playing position. 
+### (2) Why is it important to address this question?
 
-## (5) How did you implement this entire project? Were there any new concepts that you learnt to implement some aspects of it?
-#### For all of the three questions, grouping and arranging was the main steps involved in interpreting the data, as well as labelling and plotting the graphs in a visual appealling way, which involves using function like coord_flip() so the axis label will not overlap with one each other. In addition to answer the questions, two shiny apps are employed at the end, one allowing the user to search any player they want to, and one allowing user to display the player's detail rating with radar chart. Both shiny app were quite challenging to me, especially the radar chart one which involve using package "fmsb" that is not taught in class and prepare the data so that it could fit with the function.
+Football is one of the mainstream entertainment / sports, and by presenting the data about players in an comprehensive way, one can search and learn more about the player or teams of their interest, as well as the detail value after different categories such as pace, shooting, strength etc. The specific questions are chosen because by answering these question, it provides insight into topic in various aspects, which explore the data from the view of club teams, national teams, and individual players.
 
+### (3) Why do you think the data sources that you have curated can help you answer the question?
+
+The data set used in this project is a csv file that contain all ratings of the male football players registered in the EAFC24 game, the raw data set contains 15845 rows of observations with 40 categories (columns) of data for each observation. By filtering the desired categories, this detailed data set is sufficient to answer the questions constructed.
+
+### (4) What are the insights from the data and how are they depicted in plots?
+
+From exploring the data and answering the designed questions, we were able to observe various insights. Firstly from the first question, we had a rough idea of teams rating distribution, that majority of the clubs have a average player rating from 60 to 70, this was observed from the distribution graph. This distribution was also compared with the top teams, where the Top 20 club was listed out and plot a saparate graph, showing the competetiveness among the top teams. From the second question, the players were viewed from the point of national team, where the top nations are listed out and a graph was plotted, showing that the number of players differ significantly among the top countries. From the third question, viewing from the perspective of individual player, the point was stressed on the extreme difficulty to be a player of the top level, as indicated by the rating distribution graph, dissected by different playing position.
+
+In addition to the chosen questions, the website also allow users to explore insights about individual players base on their own interest, with the use of shiny apps. The interactive shiny app allow the user to search any player they have in mind, with display of the detail categorical rating. Which then can be displayed with the radar chart for a comprehensive visual illustration, two identical radar chart app were embedded so that the user can compare any two players side by side, allowing comparison in specific attributes between the two players.
+
+### (5) How did you implement this entire project? Were there any new concepts that you learnt to implement some aspects of it?
+
+For all of the three questions, grouping and arranging was the main steps involved in interpreting the data, as well as labelling and plotting the graphs in a visual appealling way, which involves using function like coord_flip() so the axis label will not overlap with one each other. The filtered labeling of data used in Question 1 was also useful in highlighting the Top 5 data among the others. In addition to answer the questions, two shiny apps are employed at the end, one allowing the user to search any player they want to, and one allowing user to display the player's detail rating with radar chart. Both shiny app were quite challenging to me, especially the radar chart one which involve using package "fmsb" that is not taught in class and prepare the data so that it could fit with the function.
 
 ## Reference List
-#### Coder, R. (2021, March 24). Radar chart (spider plot) in R with fmsb. R CHARTS | a Collection of Charts and Graphs Made With the R Programming Language. https://r-charts.com/ranking/radar-chart/
-#### A. (2020, December 12). Beautiful Radar Chart in R using FMSB and GGPlot Packages. Datanovia. https://www.datanovia.com/en/blog/beautiful-radar-chart-in-r-using-fmsb-and-ggplot-packages/#prerequisites
-#### Horst, J. L. A. (2021, January 8). Chapter 3 R & RStudio, RMarkdown | R for Excel Users. https://rstudio-conf-2020.github.io/r-for-excel/rstudio.html
-#### Holtz, Y. (n.d.). Spider Chart | the R Graph Gallery. https://r-graph-gallery.com/spider-or-radar-chart.html
-#### 10+ EA SPORTS FC 24 HD Wallpapers and Backgrounds. (n.d.). Wallpaper Abyss. https://wall.alphacoders.com/by_sub_category.php?id=364319&name=EA+SPORTS+FC+24+Wallpapers
-#### EA SPORTS FC 24 FULL PLAYERS DATABASE AND STATS. (2023, October 9). Kaggle. https://www.kaggle.com/datasets/nyagami/fc-24-players-database-and-stats-from-easports/data
+
+Coder, R. (2021, March 24). Radar chart (spider plot) in R with fmsb. R CHARTS \| a Collection of Charts and Graphs Made With the R Programming Language. <https://r-charts.com/ranking/radar-chart/>
+
+A. (2020, December 12). Beautiful Radar Chart in R using FMSB and GGPlot Packages. Datanovia. <https://www.datanovia.com/en/blog/beautiful-radar-chart-in-r-using-fmsb-and-ggplot-packages/#prerequisites>
+
+Horst, J. L. A. (2021, January 8). Chapter 3 R & RStudio, RMarkdown \| R for Excel Users. <https://rstudio-conf-2020.github.io/r-for-excel/rstudio.html>
+
+Holtz, Y. (n.d.). Spider Chart \| the R Graph Gallery. <https://r-graph-gallery.com/spider-or-radar-chart.html>
+
+10+ EA SPORTS FC 24 HD Wallpapers and Backgrounds. (n.d.). Wallpaper Abyss. <https://wall.alphacoders.com/by_sub_category.php?id=364319&name=EA+SPORTS+FC+24+Wallpapers>
+
+EA SPORTS FC 24 FULL PLAYERS DATABASE AND STATS. (2023, October 9). Kaggle. <https://www.kaggle.com/datasets/nyagami/fc-24-players-database-and-stats-from-easports/data>
